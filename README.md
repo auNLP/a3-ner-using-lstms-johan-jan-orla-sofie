@@ -5,6 +5,7 @@
 
 ## Table of Contents
 - Description
+- Learning goals
 - Results
 - Reproducing the Scripts
 - Project Organization
