@@ -3,7 +3,7 @@
 
 <div align="center"><img src="https://github.com/Orlz/CDS_Visual_Analytics/blob/main/Portfolio/company.png" width="75" height="75"/></div
 
-## Table of Contents 
+__Table of Contents__
 - Description]
 - Results
 - Reproducing the Scripts
