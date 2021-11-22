@@ -1,10 +1,13 @@
+<p align="center">
 # Assignment 3: Named Entity Recognition (NER)
 ## Using LSTMs and Word Embeddings to detect entities in unstructured texts
+</p>
 
-<div align="center"><img src="https://github.com/Orlz/CDS_Visual_Analytics/blob/main/Portfolio/company.png" width="75" height="75"/></div
+<p align="center"><img src="https://github.com/Orlz/CDS_Visual_Analytics/blob/main/Portfolio/company.png" width="75" height="75"/>
+</p>
 
-__Table of Contents__
-- Description]
+## Table of Contents
+- Description
 - Results
 - Reproducing the Scripts
 - Project Organization
