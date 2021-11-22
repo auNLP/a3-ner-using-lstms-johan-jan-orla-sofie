@@ -1,19 +1,18 @@
 """
 Contains function for loading, batching and converting data.
 """
-
+import random
 from itertools import islice
 from typing import Iterable, List, Tuple
 
 import numpy as np
 import torch
+from torch import nn
 
 import datasets
 from datasets.dataset_dict import DatasetDict
-
 from gensim.models.keyedvectors import KeyedVectors
-from torch import nn
-import random
+
 
 def load_data() -> DatasetDict:
     """Load the conllpp dataset.
@@ -46,13 +45,11 @@ def load_sst2() -> DatasetDict:
     test_idx = [i for i, is_test in enumerate(bool_is_test) if is_test]
     train_idx = [i for i, is_test in enumerate(bool_is_test) if not is_test]
 
-
     # overwrite existing test and train set
     dataset["test"] = dataset["train"].select(np.array(test_idx))
     dataset["train"] = dataset["train"].select(np.array(train_idx))
 
     return dataset
-
 
 
 def batch(dataset: Iterable, batch_size: int) -> Iterable:
@@ -109,7 +106,21 @@ def gensim_to_torch_embedding(gensim_wv: KeyedVectors) -> Tuple[nn.Embedding, di
 
     return emb_layer, vocab
 
-def prepare_batch(tokens: List[List[str]], labels: List[List[int]]) -> Tuple[torch.Tensor, torch.Tensor]:
+
+def tokens_to_idx(tokens, vocab):
+    """
+    TODO documentation
+    """
+    # toks, batch_size = tokens
+    return [vocab.get(t.lower(), vocab["UNK"]) for t in tokens]
+
+
+def data_to_tensor(
+    tokens: List[List[str]],
+    labels: List[List[int]],
+    vocab,
+    max_sentence_length
+    ) -> Tuple[torch.Tensor, torch.Tensor]:
     """Prepare a batch of data for training.
 
     Args:
@@ -117,6 +128,21 @@ def prepare_batch(tokens: List[List[str]], labels: List[List[int]]) -> Tuple[tor
         labels (List[List[int]]): A list of lists of labels.
 
     Returns:
-        Tuple[torch.Tensor, torch.Tensor]: A tuple of tensors containing the tokens and labels.
-    """    
-    pass
+        Tuple[torch.Tensor, torch.Tensor]: A tuple of tensors containing the token ids and labels.
+    """ 
+    n_docs = len(tokens)
+
+    batch_tok_idx = [tokens_to_idx(sent, vocab=vocab) for sent in tokens]
+
+    token_map = vocab["PAD"] * np.ones((n_docs, max_sentence_length))
+    label_map = -1 * np.ones((n_docs, max_sentence_length))
+
+    for i in range(n_docs):
+        tok_idx = batch_tok_idx[i]
+        tags = labels[i]
+        size = len(tok_idx)
+
+        token_map[i][:size] = tok_idx
+        label_map[i][:size] = tags
+
+    return torch.LongTensor(token_map), torch.LongTensor(label_map)

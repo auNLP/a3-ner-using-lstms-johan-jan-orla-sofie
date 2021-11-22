@@ -8,7 +8,7 @@ class TokenLSTM(nn.Module):
     An LSTM layer that takes in a sequence of tokens and returns a sequence of tags.
     """
     def __init__(
-        self, output_dim: int, embedding_layer: nn.Embedding, hidden_dim_size: int
+        self, output_dim: int, embedding_layer: nn.Embedding, hidden_dim_size: int, bidirectional: bool
     ):
         super().__init__()
 
@@ -18,7 +18,7 @@ class TokenLSTM(nn.Module):
         self.embedding_size = embedding_layer.weight.shape[1]
 
         # the LSTM takes an embedded sentence
-        self.lstm = nn.LSTM(self.embedding_size, hidden_dim_size, batch_first=True)
+        self.lstm = nn.LSTM(self.embedding_size, hidden_dim_size, batch_first=True, bidirectional=bidirectional)
 
         # fc (fully connected) layer transforms the LSTM-output to give the final output layer
         self.fc = nn.Linear(hidden_dim_size, output_dim)
