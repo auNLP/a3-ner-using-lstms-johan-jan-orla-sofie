@@ -4,11 +4,10 @@
 <div align="center"><img src="https://github.com/Orlz/CDS_Visual_Analytics/blob/main/Portfolio/company.png" width="75" height="75"/></div
 
 ## Table of Contents 
-
-- [Description](#Project)
-- [Results](#Results)
-- [Reproducing the Scripts](#Operating)
-- [Project Organization](#ProjectOrganization)
+- Description]
+- Results
+- Reproducing the Scripts
+- Project Organization
 
 ## Assignment Description <br> 
 In this assignment, a recurrent neural network in the form of a Long Short Term Memory (LSTM) model was trained to identify named entities in the 'CoNLLPP' dataset using gensim's GloVe word embeddings. The LSTM model was trained periodically using early stopping. Hence, if the model has not improves in a specified number of epochs, the training is stopped and the model is saved.The CoNLLPP dataset is an improvement of the popular CoNLL-2003 dataset, which contains sentences collected from the Reuters Corpus. This corpus consists of Reuters news stories between August 1996 and August 1997. For the training and development set, ten days worth of data were taken from the files representing the end of August 1996. For the test set, the texts were from December 1996. The preprocessed raw data covers the month of September 1996.
@@ -28,7 +27,7 @@ LSTM models are a special type of recurrent neural network capable of learning o
 ## Results
 The results of the LSTM model with default parameters (n_epochs = 30, lr = 0.01, hidden_dim = 30, patience = 10, optimizer = Adam, bidirectional = False, word_embedding_dim = 100-dim GloVe) and the experiments which include changing the dimensions of the word embeddings (exp. 1), changing the size of the hidden layer (exp. 2) and changing the LSTM to bidirectional (exp. 3) are reported below:
 
-|               | Default | Exp. 1: word embeddings = 300 dim | Exp. 2: Hidden layer dim = 100 | Exp. 3: Bidirectional = True |
+|               | Default model parameters | Exp. 1: word embeddings = 300 dim | Exp. 2: Hidden layer dim = 100 | Exp. 3: Bidirectional = True |
 |---------------|---------|-----------------------------------|--------------------------------|------------------------------|
 | Accuracy      | 0.82    | 0.82                              | 0.82                           | 0.87                         |
 | Macro avg. F1 | 0.12    | 0.13                              | 0.13                           | 0.32                         |
@@ -39,7 +38,7 @@ The experiments in which we change the word embedding dimensions and the hidden 
 1. If the user wishes to engage with the code and reproduce the obtained results, this section includes the necessary instructions to do so. First, the user will have to create their own version of the repository by cloning it from GitHub. This is done by executing the following from the command line: 
 
 ```
-$ git clone https://github.com/auNLP/a3-orla-johan-sofie-jan.git named-entity-recognition
+$ git clone https://github.com/auNLP/a3-ner-using-lstms-johan-jan-orla-sofie.git named-entity-recognition
 ```
 
 2. Once the user has cloned the repository, a virtual environment must be set up in which the relevant dependencies can be installed. To set up the virtual environment and install the relevant dependencies, a bash-script is provided, which automatically creates and installs the dependencies listed in the ```requirements.txt``` file when executed. To run the bash-script that sets up the virtual environment and installs the relevant dependencies, the user must execute the following from the command line. 
@@ -50,7 +49,6 @@ $ bash create_venv.sh
 ```
 
 3. Once the virtual environment has been set up and the relevant dependencies listed in the ```requirements.txt``` have been installed within it, the user is now able to run the ```main.py```script from the command line. In order to run the script, the user must first activate the virtual environment in which the script can be run. Activating the virtual environment is done as follows.
-
 
 ```
 $ source named-entity-venv/bin/activate
